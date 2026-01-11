@@ -1,19 +1,17 @@
-import { Builder } from 'xml2js';
-import { mapAgreg, mapCli } from './build';
-import { Doc3040 } from '../../types/cadoc3040';
+import { Builder } from 'xml2js'
+import { mapAgreg, mapCli } from './build'
+import { Doc3040 } from '../../types/cadoc3040'
 
+export const generateXML = (doc: Doc3040): string => {
+  const builder = new Builder({
+    xmldec: { version: '1.0', encoding: 'UTF-8' },
+    renderOpts: { pretty: true, indent: '' },
+    headless: false,
+    attrkey: '$',
+    charkey: '_'
+  })
 
-export const Run = (doc: Doc3040): string => {
-
-    const builder = new Builder({
-        xmldec: { version: '1.0', encoding: 'UTF-8' },
-        renderOpts: { pretty: true, indent: '' },
-        headless: false,
-        attrkey: '$',
-        charkey: '_'
-    });
-
-    const payload = {
+  const payload = {
     Doc3040: {
       $: {
         DtBase: doc.DtBase,
@@ -31,9 +29,12 @@ export const Run = (doc: Doc3040): string => {
       ...(doc.Cli && { Cli: doc.Cli.map(mapCli) }),
       ...(doc.Agreg && { Agreg: doc.Agreg.map(mapAgreg) })
     }
-  };
+  }
 
+  return builder.buildObject(payload)
+}
 
-    return builder.buildObject(payload);
+export const Run = (doc: Doc3040): string => {
+  return generateXML(doc)
 }
 
