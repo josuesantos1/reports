@@ -1,4 +1,4 @@
-import { connectDB, disconnectDB } from "../database/connection"
+import { connectForReports, disconnectDB } from "../database/connection"
 import { initializeBucket } from "../storage/minio.client"
 import { Cadoc3040 } from "../database/schema/cadoc3040"
 import * as cadoc3040 from "./cadoc3040/cadoc3040"
@@ -6,7 +6,7 @@ import { Doc3040 } from "../types/cadoc3040"
 import { generateZipToMinIO } from "./storage"
 
 export const Provider3040 = async () => {
-  await connectDB()
+  await connectForReports()
   await initializeBucket()
 
   const reference = "01-2026"
