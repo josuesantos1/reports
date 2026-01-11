@@ -1,7 +1,6 @@
 import { Builder } from 'xml2js';
-import { doc } from './build';
-import { run } from 'node:test';
-import { Agreg, Cli, Doc3040, Gar, Op, Venc } from '../../types/cadoc3040';
+import { mapAgreg, mapCli } from './build';
+import { Doc3040 } from '../../types/cadoc3040';
 
 
 export const Run = (doc: Doc3040): string => {
@@ -38,5 +37,3 @@ export const Run = (doc: Doc3040): string => {
     return builder.buildObject(payload);
 }
 
-
-console.log(Run(doc))

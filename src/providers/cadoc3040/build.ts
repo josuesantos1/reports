@@ -1,4 +1,5 @@
-import { Doc3040 } from "../../types/cadoc3040";
+import { Agreg, Cli, Gar, Op, Venc } from "../../types/cadoc3040";
+
 const mapVenc = (v: Venc) => {
   return {
     $: v
@@ -43,7 +44,7 @@ const mapOp = (op: Op) => {
   };
 }
 
-const mapCli = (cli: Cli) => {
+export const mapCli = (cli: Cli) => {
   return {
     $: {
       Tp: cli.Tp,
@@ -59,7 +60,7 @@ const mapCli = (cli: Cli) => {
   };
 }
 
-const mapAgreg = (ag: Agreg) => {
+export const mapAgreg = (ag: Agreg) => {
   return {
     $: {
       Mod: ag.Mod,
