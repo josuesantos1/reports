@@ -91,8 +91,8 @@ const AgregSchema = new Schema(
 
 export const Cadoc3040Schema = new Schema(
   {
-    DtBase: { type: String, required: true, index: true },
-    CNPJ: { type: String, required: true, index: true },
+    DtBase: { type: String, required: true },
+    CNPJ: { type: String, required: true },
     Remessa: { type: String, required: true },
     Parte: { type: String, required: true },
     TpArq: { type: String, enum: ['F', 'P'], required: true },
@@ -110,5 +110,8 @@ export const Cadoc3040Schema = new Schema(
     timestamps: true,
   }
 );
+
+Cadoc3040Schema.index({ DtBase: 1, createdAt: -1 });
+Cadoc3040Schema.index({ DtBase: 1, CNPJ: 1 });
 
 export const Cadoc3040 = model('Cadoc3040', Cadoc3040Schema);
