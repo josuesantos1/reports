@@ -1,5 +1,3 @@
-import { connectForReports, disconnectDB } from "../database/connection"
-import { initializeBucket } from "../storage/minio.client"
 import { Cadoc3040 } from "../database/schema/cadoc3040"
 import * as cadoc3040 from "./cadoc3040/cadoc3040"
 import { Doc3040 } from "../types/cadoc3040"
@@ -8,11 +6,14 @@ import { getSummaryStats } from "../reports/aggregations/cadoc3040.aggregation"
 import { createBatchStream } from "../reports/processors/batch.processor"
 
 export const Provider3040 = async () => {
-  await connectForReports()
-  await initializeBucket()
+  const now = new Date()
+  const previousMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1)
 
-  const reference = "01-2026"
-  const dtBase = "20260101"
+  const year = previousMonth.getFullYear()
+  const month = String(previousMonth.getMonth() + 1).padStart(2, '0')
+
+  const reference = `${month}-${year}`
+  const dtBase = `${year}${month}`
 
   const stats = await Cadoc3040.aggregate(getSummaryStats(dtBase))
 
@@ -57,5 +58,5 @@ export const Provider3040 = async () => {
 
   const zipObjectName = await generateZipToMinIO(files, `CADOC_3040_${reference}.zip`, "3040")
 
-  await disconnectDB()
+  return zipObjectName
 }

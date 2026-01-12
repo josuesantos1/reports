@@ -66,10 +66,6 @@ export const generateZipToMinIO = async (
 
   for (let i = 0; i < uploadedFiles.length; i++) {
     await deleteFile(uploadedFiles[i])
-
-    if ((i + 1) % 100 === 0) {
-      console.log(`Deleted ${i + 1}/${uploadedFiles.length} files`)
-    }
   }
 
   return zipObjectName
