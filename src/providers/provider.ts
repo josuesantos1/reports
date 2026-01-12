@@ -59,5 +59,3 @@ export const Provider3040 = async () => {
 
   await disconnectDB()
 }
-
-Provider3040()
