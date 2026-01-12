@@ -13,21 +13,19 @@ export const generateReport3040 = async () => {
   const month = String(previousMonth.getMonth() + 1).padStart(2, '0');
 
   const reference = `${month}-${year}`;
-  const dtBasePattern = `${year}${month}`;
+  const dtBase = `${year}-${month}`;
 
-  const total = await Cadoc3040.countDocuments({
-    DtBase: { $regex: `^${dtBasePattern}` },
-  });
+  const total = await Cadoc3040.countDocuments({ DtBase: dtBase });
 
   if (total === 0) {
     return {
       reportType: '3040',
       status: 'error',
-      message: `No documents found for month: ${dtBasePattern}`,
+      message: `No documents found for DtBase: ${dtBase}`,
     };
   }
 
-  const cursor = Cadoc3040.find({ DtBase: { $regex: `^${dtBasePattern}` } })
+  const cursor = Cadoc3040.find({ DtBase: dtBase })
     .sort({ createdAt: -1 })
     .lean<Doc3040>()
     .cursor();

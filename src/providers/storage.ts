@@ -59,14 +59,16 @@ export const generateZipToMinIO = async (
     archive.append(fileStream, { name: fileName });
   }
 
-  archive.finalize();
-
-  const zipObjectName = await uploadStream(
+  const uploadPromise = uploadStream(
     zipFileName,
     passThrough,
     'application/zip',
     { folder: provider }
   );
+
+  await archive.finalize();
+
+  const zipObjectName = await uploadPromise;
 
   for (let i = 0; i < uploadedFiles.length; i++) {
     await deleteFile(uploadedFiles[i]);

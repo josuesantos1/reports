@@ -3,7 +3,7 @@ export interface Doc3040 {
   CNPJ: string;
   Remessa: string;
   Parte: string;
-  TpArq: 'F' | 'P';
+  TpArq: 'F' | 'Y';
   NomeResp: string;
   EmailResp: string;
   TelResp: string;

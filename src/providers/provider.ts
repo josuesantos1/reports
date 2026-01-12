@@ -31,6 +31,8 @@ export const Provider3040 = async () => {
     return batch.map((doc, idx) => {
       const globalIndex = processedCount + idx + 1;
 
+      doc.TpArq = 'Y';
+
       if (globalIndex === total) {
         doc.TpArq = 'F';
       }
