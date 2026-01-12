@@ -1,16 +1,16 @@
-import { Agreg, Cli, Gar, Op, Venc } from "../../types/cadoc3040";
+import { Agreg, Cli, Gar, Op, Venc } from '../../types/cadoc3040';
 
 const mapVenc = (v: Venc) => {
   return {
-    $: v
+    $: v,
   };
-}
+};
 
 const mapGar = (g: Gar) => {
   return {
-    $: g
+    $: g,
   };
-}
+};
 
 const mapOp = (op: Op) => {
   return {
@@ -23,26 +23,26 @@ const mapOp = (op: Op) => {
       Indx: op.Indx,
       VarCamb: op.VarCamb,
       DtVencOp: op.DtVencOp,
-    //   ClassOp: op.ClassOp,
+      //   ClassOp: op.ClassOp,
       CEP: op.CEP,
       TaxEft: op.TaxEft,
       DtContr: op.DtContr,
       ProvConsttd: op.ProvConsttd,
       CaracEspecial: op.CaracEspecial,
-    //   Cosif: op.Cosif,
-      IPOC: op.IPOC
+      //   Cosif: op.Cosif,
+      IPOC: op.IPOC,
     },
-        Venc: [mapVenc(op.Venc)],
+    Venc: [mapVenc(op.Venc)],
     ...(op.Gar && { Gar: op.Gar.map(mapGar) }),
     ContInstFinRes4966: {
-        $: {
-            ClasAtFin: op.ContInstFinRes4966.ClasAtFin,
-            CartProvMin: op.ContInstFinRes4966.CartProvMin,
-            VlrContBr: op.ContInstFinRes4966.VlrContBr
-        }
+      $: {
+        ClasAtFin: op.ContInstFinRes4966.ClasAtFin,
+        CartProvMin: op.ContInstFinRes4966.CartProvMin,
+        VlrContBr: op.ContInstFinRes4966.VlrContBr,
       },
+    },
   };
-}
+};
 
 export const mapCli = (cli: Cli) => {
   return {
@@ -54,17 +54,17 @@ export const mapCli = (cli: Cli) => {
       TpCtrl: cli.TpCtrl,
       IniRelactCli: cli.IniRelactCli,
       CongEcon: cli.CongEcon,
-    //   ClassCli: cli.ClassCli
+      //   ClassCli: cli.ClassCli
     },
-    Op: cli.Op.map(mapOp)
+    Op: cli.Op.map(mapOp),
   };
-}
+};
 
 export const mapAgreg = (ag: Agreg) => {
   return {
     $: {
       Mod: ag.Mod,
-    //   ClassOp: ag.ClassOp,
+      //   ClassOp: ag.ClassOp,
       FaixaVlr: ag.FaixaVlr,
       TpCli: ag.TpCli,
       TpCtrl: ag.TpCtrl,
@@ -73,12 +73,12 @@ export const mapAgreg = (ag: Agreg) => {
       NatuOp: ag.NatuOp,
       CaracEspecial: ag.CaracEspecial,
       VincME: ag.VincME,
-    //   PrzProvm: ag.PrzProvm,
+      //   PrzProvm: ag.PrzProvm,
       DesempOp: ag.DesempOp,
       QtdOp: ag.QtdOp,
       QtdCli: ag.QtdCli,
-      ProvConsttd: ag.ProvConsttd
+      ProvConsttd: ag.ProvConsttd,
     },
-    Venc: [mapVenc(ag.Venc)]
+    Venc: [mapVenc(ag.Venc)],
   };
-}
+};

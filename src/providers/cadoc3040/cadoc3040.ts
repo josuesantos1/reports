@@ -1,6 +1,6 @@
-import { Builder } from 'xml2js'
-import { mapAgreg, mapCli } from './build'
-import { Doc3040 } from '../../types/cadoc3040'
+import { Builder } from 'xml2js';
+import { mapAgreg, mapCli } from './build';
+import { Doc3040 } from '../../types/cadoc3040';
 
 export const generateXML = (doc: Doc3040): string => {
   const builder = new Builder({
@@ -8,8 +8,8 @@ export const generateXML = (doc: Doc3040): string => {
     renderOpts: { pretty: true, indent: '' },
     headless: false,
     attrkey: '$',
-    charkey: '_'
-  })
+    charkey: '_',
+  });
 
   const payload = {
     Doc3040: {
@@ -24,17 +24,16 @@ export const generateXML = (doc: Doc3040): string => {
         TelResp: doc.TelResp,
         TotalCli: doc.TotalCli,
         MetodDifTJE: doc.MetodDifTJE,
-        MetodApPE: doc.MetodApPE
+        MetodApPE: doc.MetodApPE,
       },
       ...(doc.Cli && { Cli: doc.Cli.map(mapCli) }),
-      ...(doc.Agreg && { Agreg: doc.Agreg.map(mapAgreg) })
-    }
-  }
+      ...(doc.Agreg && { Agreg: doc.Agreg.map(mapAgreg) }),
+    },
+  };
 
-  return builder.buildObject(payload)
-}
+  return builder.buildObject(payload);
+};
 
 export const Run = (doc: Doc3040): string => {
-  return generateXML(doc)
-}
-
+  return generateXML(doc);
+};

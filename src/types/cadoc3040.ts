@@ -1,30 +1,29 @@
-
 export interface Doc3040 {
-  DtBase: string;          
+  DtBase: string;
   CNPJ: string;
   Remessa: string;
   Parte: string;
-  TpArq: "F" | "P";
+  TpArq: 'F' | 'P';
   NomeResp: string;
   EmailResp: string;
   TelResp: string;
   TotalCli: number;
-  MetodApPE: "S" | "C"
-  MetodDifTJE: "N" | "S"
-  Cli?: Cli[];             
-  Agreg?: Agreg[];         
+  MetodApPE: 'S' | 'C';
+  MetodDifTJE: 'N' | 'S';
+  Cli?: Cli[];
+  Agreg?: Agreg[];
 }
 
 export interface Cli {
-  Tp: string;              
-  Cd: string;              
-  Autorzc: "S" | "N";
+  Tp: string;
+  Cd: string;
+  Autorzc: 'S' | 'N';
   PorteCli: string;
   TpCtrl: string;
-  IniRelactCli: string;    
+  IniRelactCli: string;
   CongEcon: string;
   // ClassCli: string;
-  Op: Op[];                
+  Op: Op[];
 }
 
 export interface Op {
@@ -35,27 +34,27 @@ export interface Op {
   OrigemRec: string;
   Indx: string;
   VarCamb: string;
-  DtVencOp: string;        
+  DtVencOp: string;
   // ClassOp: string;
   CEP: string;
   TaxEft: number;
-  DtContr: string;         
+  DtContr: string;
   ProvConsttd: number;
-  CaracEspecial?: string; 
+  CaracEspecial?: string;
   // Cosif: string;
   IPOC: string;
   Venc: Venc;
   Gar?: Gar[];
-  ContInstFinRes4966: ContInstFinRes4966
+  ContInstFinRes4966: ContInstFinRes4966;
 }
 
 export interface Gar {
-  Tp: string;              
-  Ident?: string;          
-  PercGar?: number;        
-  VlrOrig?: number;        
-  VlrData?: number;        
-  DtReav?: string;         
+  Tp: string;
+  Ident?: string;
+  PercGar?: number;
+  VlrOrig?: number;
+  VlrData?: number;
+  DtReav?: string;
 }
 
 export interface Agreg {
@@ -68,7 +67,7 @@ export interface Agreg {
   OrigemRec: string;
   NatuOp: string;
   CaracEspecial: string;
-  VincME: "S" | "N";
+  VincME: 'S' | 'N';
   // PrzProvm: "S" | "N";
   DesempOp: string;
   QtdOp: number;
@@ -87,6 +86,6 @@ export interface Venc {
 
 export interface ContInstFinRes4966 {
   ClasAtFin: string;
-  CartProvMin: string
-  VlrContBr: string
+  CartProvMin: string;
+  VlrContBr: string;
 }

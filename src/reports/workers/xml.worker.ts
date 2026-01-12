@@ -1,7 +1,7 @@
-import { parentPort, workerData } from 'worker_threads'
-import { Builder } from 'xml2js'
-import { Doc3040 } from '../../types/cadoc3040'
-import { mapAgreg, mapCli } from '../../providers/cadoc3040/build'
+import { parentPort, workerData } from 'worker_threads';
+import { Builder } from 'xml2js';
+import { Doc3040 } from '../../types/cadoc3040';
+import { mapAgreg, mapCli } from '../../providers/cadoc3040/build';
 
 const generate3040 = (doc: Doc3040): string => {
   const builder = new Builder({
@@ -9,8 +9,8 @@ const generate3040 = (doc: Doc3040): string => {
     renderOpts: { pretty: true, indent: '' },
     headless: false,
     attrkey: '$',
-    charkey: '_'
-  })
+    charkey: '_',
+  });
 
   const payload = {
     Doc3040: {
@@ -25,20 +25,20 @@ const generate3040 = (doc: Doc3040): string => {
         TelResp: doc.TelResp,
         TotalCli: doc.TotalCli,
         MetodDifTJE: doc.MetodDifTJE,
-        MetodApPE: doc.MetodApPE
+        MetodApPE: doc.MetodApPE,
       },
       ...(doc.Cli && { Cli: doc.Cli.map(mapCli) }),
-      ...(doc.Agreg && { Agreg: doc.Agreg.map(mapAgreg) })
-    }
-  }
+      ...(doc.Agreg && { Agreg: doc.Agreg.map(mapAgreg) }),
+    },
+  };
 
-  return builder.buildObject(payload)
-}
+  return builder.buildObject(payload);
+};
 
 if (parentPort) {
-  const docs: Doc3040[] = workerData
+  const docs: Doc3040[] = workerData;
 
-  const results = docs.map(doc => generate3040(doc))
+  const results = docs.map((doc) => generate3040(doc));
 
-  parentPort.postMessage(results)
+  parentPort.postMessage(results);
 }
