@@ -1,6 +1,6 @@
 import archiver from "archiver"
-import { PassThrough } from "stream"
-import { uploadStream } from "../storage/storage.service"
+import { PassThrough, Readable } from "stream"
+import { uploadStream, downloadStream, deleteFile } from "../storage/storage.service"
 
 export type ZipFile = {
   name: string
@@ -27,25 +27,50 @@ export const generateZipToMinIO = async (
   zipFileName: string,
   provider: string
 ): Promise<string> => {
+  const preFolder = `pre-${provider}`
+  const uploadedFiles: string[] = []
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i]
+    const xmlStream = Readable.from(Buffer.from(file.content, 'utf-8'))
+
+    const objectName = await uploadStream(
+      file.name,
+      xmlStream,
+      'application/xml',
+      { folder: preFolder }
+    )
+
+    uploadedFiles.push(objectName)
+  }
+
   const archive = archiver("zip", { zlib: { level: 9 } })
   const passThrough = new PassThrough()
 
   archive.pipe(passThrough)
 
-  for (const file of files) {
-    archive.append(file.content, { name: file.name })
+  for (const objectName of uploadedFiles) {
+    const fileStream = await downloadStream(objectName)
+    const fileName = objectName.split('/').pop() || objectName
+    archive.append(fileStream, { name: fileName })
   }
 
   archive.finalize()
 
-  const objectName = await uploadStream(
+  const zipObjectName = await uploadStream(
     zipFileName,
     passThrough,
     "application/zip",
-    {
-      folder: provider
-    }
+    { folder: provider }
   )
 
-  return objectName
+  for (let i = 0; i < uploadedFiles.length; i++) {
+    await deleteFile(uploadedFiles[i])
+
+    if ((i + 1) % 100 === 0) {
+      console.log(`Deleted ${i + 1}/${uploadedFiles.length} files`)
+    }
+  }
+
+  return zipObjectName
 }
