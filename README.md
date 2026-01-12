@@ -11,6 +11,13 @@ Sistema de geração de relatórios e CADOCs
 
 ## Arquitetura
 
+```
+[processor] -> [reports] -> [orgão]
+```
+
+> processor: serviço responsavel por toda a logica dos cados e relatorios (Mock usando o seed)
+> reports: serviço responsavel por processar os dados, gerar os relatorios e comunicar com orgãos (Sefaz, Bacen)
+
 ## Estrutura do Projeto
 
 ```
