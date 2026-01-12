@@ -3,7 +3,7 @@ import { Builder } from 'xml2js'
 import { Doc3040 } from '../../types/cadoc3040'
 import { mapAgreg, mapCli } from '../../providers/cadoc3040/build'
 
-const generateXML = (doc: Doc3040): string => {
+const generate3040 = (doc: Doc3040): string => {
   const builder = new Builder({
     xmldec: { version: '1.0', encoding: 'UTF-8' },
     renderOpts: { pretty: true, indent: '' },
@@ -38,7 +38,7 @@ const generateXML = (doc: Doc3040): string => {
 if (parentPort) {
   const docs: Doc3040[] = workerData
 
-  const results = docs.map(doc => generateXML(doc))
+  const results = docs.map(doc => generate3040(doc))
 
   parentPort.postMessage(results)
 }
