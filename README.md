@@ -16,6 +16,7 @@ Sistema de geração de relatórios e CADOCs
 
 
 > processor: serviço responsavel por toda a logica dos cados e relatorios (Mock usando o seed)
+- o processor é responsavel por pre-processar os dados e salvar os dados no banco em estrutura proximo ao report
 
 > reports: serviço responsavel por processar os dados, gerar os relatorios e comunicar com orgãos (Sefaz, Bacen)
 ```
