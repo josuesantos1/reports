@@ -160,11 +160,11 @@ const genAgregado = () => ({
   Venc: genVenc(),
 });
 
-function buildCadoc(config: SeedConfig) {
+function buildCadoc(config: SeedConfig, dtBase: string) {
   const instituicaoCNPJ = cnpj();
 
   return {
-    DtBase: formatDate(randomDate(new Date('2024-01-01'), new Date())),
+    DtBase: dtBase,
     CNPJ: instituicaoCNPJ,
     Remessa: String(rand(1, 999)).padStart(3, '0'),
     Parte: String(rand(1, 99)).padStart(2, '0'),
@@ -185,13 +185,25 @@ function buildCadoc(config: SeedConfig) {
 async function seed(config: SeedConfig) {
   await connectDB();
 
-  const docs = Array.from({ length: config.Cadoc3040 }, () =>
-    buildCadoc(config)
+  // Gera dados para os últimos 6 meses (baseado na data atual)
+  const now = new Date();
+  const baseDates: string[] = [];
+
+  for (let i = 0; i < 6; i++) {
+    const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    baseDates.push(formatDate(date));
+  }
+
+  console.log('Gerando dados para as seguintes datas base:', baseDates);
+
+  const docs = baseDates.flatMap((dtBase) =>
+    Array.from({ length: config.Cadoc3040 }, () => buildCadoc(config, dtBase))
   );
 
   await Cadoc3040.insertMany(docs);
 
   console.log('Seed CADOC 3040 concluído');
+  console.log(`Total de documentos gerados: ${docs.length}`);
   console.table(config);
 
   await disconnectDB();
