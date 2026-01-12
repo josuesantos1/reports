@@ -9,6 +9,7 @@
     "start": "node dist/server.js",
     "seed": "tsx scripts/seed.ts",
     "lint": "eslint src/**/*.ts",
+    "format": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
