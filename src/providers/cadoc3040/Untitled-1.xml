@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Doc3040 DtBase="2025-01" CNPJ="12345678" Remessa="1" Parte="1" TpArq="F" NomeResp="JOSE DA SILVA" EmailResp="jose.silva@empresa.com" TelResp="11999999999" TotalCli="1" MetodDifTJE="N" MetodApPE="S">
+<Cli Tp="2" Cd="00038166" Autorzc="S" PorteCli="1" TpCtrl="01" IniRelactCli="2010-01-01" CongEcon="000000">
+<Op DetCli="00038166000288" Contrt="ABC123" NatuOp="01" Mod="0101" OrigemRec="0101" Indx="11" VarCamb="790" DtVencOp="2022-01-01" CEP="00000000" TaxEft="20.25" DtContr="2010-01-01" ProvConsttd="1000" CaracEspecial="02;03" IPOC="123456780101200038166ABC123">
+<Venc v110="10000" v120="10000" v130="10000" v140="10000" v150="10000"/>
+<Gar Tp="0902" Ident="00038166000954" PercGar="100"/>
+<ContInstFinRes4966 ClasAtFin="3" CartProvMin="C1" VlrContBr="2"/>
+</Op>
+<Op DetCli="00038166000369" Contrt="XYZ123" NatuOp="01" Mod="0101" OrigemRec="0101" Indx="11" VarCamb="790" DtVencOp="2022-01-01" CEP="00000000" TaxEft="54.23" DtContr="2010-01-01" ProvConsttd="1000" IPOC="123456780101200038166XYZ123">
+<Venc v110="20000" v120="20000" v130="20000" v140="20000" v150="20000"/>
+<ContInstFinRes4966 ClasAtFin="3" CartProvMin="C1" VlrContBr="2"/>
+<Gar Tp="0102" VlrOrig="100000" VlrData="100000" DtReav="2010-10-01"/>
+</Op>
+</Cli>
+<Agreg Mod="0101" FaixaVlr="1" TpCli="1" TpCtrl="01" Localiz="10058" OrigemRec="0100" NatuOp="01" CaracEspecial="01" VincME="N" DesempOp="01" QtdOp="10000" QtdCli="8000" ProvConsttd="1000000">
+<Venc v110="20000" v120="20000" v130="20000" v140="20000" v150="20000"/>
+</Agreg>
+</Doc3040>

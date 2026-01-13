@@ -79,6 +79,18 @@ docker compose exec app npm run seed
 
 Isso gerará dados de teste para os últimos 6 meses.
 
+### 3. Gerar reports
+
+```bash
+curl -X POST http://localhost:3000/reports \
+  -H "Content-Type: application/json" \
+  -d '{"reports": ["3040"]}'
+```
+
+> isso gerará o cadoc 3040.
+
+> idealmente seria uma mensagem assincrona, mas por questões de testes, esta como API
+
 ### 3. Acessar os serviços
 
 - **API**: http://localhost:3000
